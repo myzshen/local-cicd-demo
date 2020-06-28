@@ -1,0 +1,17 @@
+#!/bin/bash
+
+set -x
+
+# Replace with your Jenkins URL and admin credentials
+SERVER="http://localhost:8080"
+
+# File where web session cookie is saved
+COOKIEJAR="$(mktemp)"
+
+# Define job name to be built
+JOBNAME="mvn-test"
+
+CRUMB=$(curl -u "admin:admin" --cookie-jar "${COOKIEJAR}" "${SERVER}/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,%22:%22,//crumb)")
+
+curl -X POST -u "admin:admin" --cookie "${COOKIEJAR}" -H "${CRUMB}" "${SERVER}"/job/${JOBNAME}/build
+

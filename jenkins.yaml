@@ -1,0 +1,64 @@
+jenkins:
+  systemMessage: "See also: https://github.com/local-cicd-demo"
+  mode: NORMAL
+  numExecutors: 2
+  agentProtocols:
+  - "JNLP4-connect"
+  - "Ping"
+  scmCheckoutRetryCount: 2
+  quietPeriod: 5
+  markupFormatter:
+    rawHtml:
+      disableSyntaxHighlighting: false
+  primaryView:
+    all:
+      name: "all"
+  crumbIssuer:
+    standard:
+      excludeClientIPFromCrumb: true
+  globalNodeProperties:
+  - envVars:
+      env:
+      - key: "jenkinsUrl"
+        value: "http://localhost:8080"
+  clouds:
+    - docker:
+        name: "docker"
+        dockerApi:
+          dockerHost:
+            uri: "unix:///var/run/docker.sock"
+        templates:
+          - labelString: "docker-agent"
+            dockerTemplateBase:
+              image: "jenkins/inbound-agent"
+              volumes:
+                - /var/run/docker.sock:/var/run/docker.sock
+            remoteFs: "/home/jenkins/agent"
+            connector:
+              attach:
+                user: "admin"
+            instanceCapStr: "10"
+            retentionStrategy:
+              idleMinutes: 1
+unclassified:
+  location:
+    url: "http://localhost:8080/"
+
+jobs:
+  - script: >
+      pipelineJob('mvn-test') {
+        definition {
+          cpsScm {
+            scm {
+              git {
+                remote {
+                  url('/home/mvn-test')
+                }
+                branch('*/master')
+              }
+            }
+            lightweight()
+          }
+        }
+      }
+
