@@ -12,13 +12,12 @@ To make things easier for local test, it integrates with a maven test project cl
 
 **0. Prepare environment**
 
-Script preconfig is to install Docker engine, make program etc. on the host.
+Script preconfig is to install Docker engine and make program, disable selinux and modify docker unix socket permission etc. on a fresh host. You can skip this step if they are already configured on your server.
 ```
 ./preconfig.sh 
 ```
 
-It modifies unix socket /var/run/docker.sock permission to facitilate the local setup. You may need to run the following command manually
-if it has no need to install Docker, make etc. with the above script. You should revert this change after test though.
+It may need to modify unix socket /var/run/docker.sock permission to facitilate the local setup. You may need to run the following command manually if it has no need to install Docker, make etc. with the above script. You should revert this change after test though.
 ```
 sudo chmod 666 /var/run/docker.sock
 ```
