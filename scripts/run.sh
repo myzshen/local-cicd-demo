@@ -2,11 +2,14 @@
 
 set -x
 
+IMAGE_NAME="jenkins-master"
+CONTAINER_NAME="jenkins-master"
+
 docker run -d \
- --name jenkins-master \
+ --name ${CONTAINER_NAME} \
  -p 8080:8080 \
  -p 50000:50000 \
  -v /var/run/docker.sock:/var/run/docker.sock \
  -v "$HOME":/home \
- jenkins-master
+ ${IMAGE_NAME}
 
