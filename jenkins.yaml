@@ -1,5 +1,5 @@
 jenkins:
-  systemMessage: "See also: https://github.com/local-cicd-demo"
+  systemMessage: "See also: https://github.com/myzshen/local-cicd-demo"
   mode: NORMAL
   numExecutors: 2
   agentProtocols:
