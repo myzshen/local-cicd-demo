@@ -4,24 +4,24 @@ This is a local CI/CD demo based on Jenkins where everything is put under versio
 
  * Global Jenkins settings - With [Jenkins Configuration as Code](https://jenkins.io/projects/jcasc/).
  * Jenkins job configurations - With [Job DSL](https://github.com/jenkinsci/job-dsl-plugin/wiki).
- * Jenkins build process - With [Pipelines](https://jenkins.io/doc/book/pipeline/)
+ * Jenkins build process - With [Pipelines](https://jenkins.io/doc/book/pipeline/).
 
 To make things easier for local test, it integrates with a maven test project cloned under user's home folder with a post-commit hook injected so as to trigger the pipeline automatically after a git commit to local repo.
 
 
 
 **0. Prepare environment**
+
 Script preconfig is to install Docker engine, make program etc. on the host.
 ```
 ./preconfig.sh 
 ```
 
 It modifies unix socket /var/run/docker.sock permission to facitilate the local setup. You may need to run the following command manually
-if it has no need to install Docker, make etc. with the above script.
+if it has no need to install Docker, make etc. with the above script. You should revert this change after test though.
 ```
 sudo chmod 666 /var/run/docker.sock
 ```
-You should revert this change after test though.
 
 
 
@@ -43,7 +43,7 @@ src/main/java/com/mycompany/app/App.java
 src/test/java/com/mycompany/app/AppTest.java
 ```
 
-When job is running, you can launch Blue Ocean in Jeknins to monitor pipeline steps.
+When job is running, you can launch Blue Ocean in Jenkins to monitor pipeline steps' status.
 
 
 
