@@ -33,7 +33,9 @@ make run
 
 Jenkins is now available at http://localhost:8080/ and you can login with credentials found in Dockerfile.
 
-A pipeline job mvn-test is already configured with local repo path and branch.
+A pipeline job mvn-test is already configured with local repo path, branch and Jenkinsfile location.
+
+A Jenkinsfile is created under the root of the mvn-test repo, in which defines the processes from build to test then to deliver.
 
 To trigger the pipeline, you can navigate to local ~/mvn-test path, modify code in the following files and commit change.
 ```
@@ -42,7 +44,7 @@ src/main/java/com/mycompany/app/App.java
 src/test/java/com/mycompany/app/AppTest.java
 ```
 
-When job is running, you can launch Blue Ocean in Jenkins to monitor pipeline steps' status.
+When job is running, you can launch Blue Ocean in Jenkins to monitor each pipeline step's status.
 
 
 
